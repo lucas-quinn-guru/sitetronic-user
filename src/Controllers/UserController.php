@@ -17,8 +17,11 @@ use Session;
 class UserController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+    public function __construct()
+    {
+        //isAdmin middleware lets only users with a
+        //specific permission permission to access these resources
+        $this->middleware(['auth', 'isAdmin']);
     }
 
     /**
@@ -29,7 +32,7 @@ class UserController extends Controller
     public function index()
     {
         //Get all users and pass it to the view
-        $users = User::all(); 
+        $users = User::all();
         return view('users.index')->with('users', $users);
     }
 
@@ -63,11 +66,11 @@ class UserController extends Controller
         $user = User::create($request->only('email', 'name', 'password')); //Retrieving only the email and password data
 
         $roles = $request['roles']; //Retrieving the roles field
-        
+
         //Checking if a role was selected
         if (isset($roles)) {
             foreach ($roles as $role) {
-                $role_r = Role::where('id', '=', $role)->firstOrFail();            
+                $role_r = Role::where('id', '=', $role)->firstOrFail();
                 $user->assignRole($role_r); //Assigning role to user
             }
         }
@@ -86,7 +89,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return redirect('users'); 
+        return redirect('users');
     }
 
     /**
@@ -101,7 +104,6 @@ class UserController extends Controller
         $roles = Role::get(); //Get all roles
 
         return view('users.edit', compact('user', 'roles')); //pass user and roles data to view
-
     }
 
     /**
@@ -115,7 +117,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id); //Get role specified by id
 
-        //Validate name, email and password fields    
+        //Validate name, email and password fields
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email|unique:users,email,'.$id,
@@ -126,8 +128,8 @@ class UserController extends Controller
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
 
-        if (isset($roles)) {        
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
+        if (isset($roles)) {
+            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
         } else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
@@ -146,7 +148,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //Find a user with a given id and delete
-        $user = User::findOrFail($id); 
+        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()

@@ -12,10 +12,17 @@ use Spatie\Permission\Models\Permission;
 
 use Session;
 
-class PermissionController extends Controller {
+class PermissionController extends Controller
+{
+    public function __construct()
+    {
 
-    public function __construct() {
-        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+        //isAdmin middleware lets only users with a
+        //specific permission permission to access these resources
+        //$access[] = 'auth';
+        $access[] = 'isAdmin';
+
+        $this->middleware($access);
     }
 
     /**
@@ -23,10 +30,12 @@ class PermissionController extends Controller {
     *
     * @return \Illuminate\Http\Response
     */
-    public function index() {
-        $permissions = Permission::all(); //Get all permissions
+    public function index()
+    {
+        //Get all permissions
+        $permissions = Permission::all();
 
-        return view('permissions.index')->with('permissions', $permissions);
+        return view('laravel-user::permissions.index')->with('permissions', $permissions);
     }
 
     /**
@@ -34,7 +43,8 @@ class PermissionController extends Controller {
     *
     * @return \Illuminate\Http\Response
     */
-    public function create() {
+    public function create()
+    {
         $roles = Role::get(); //Get all roles
 
         return view('permissions.create')->with('roles', $roles);
@@ -46,7 +56,8 @@ class PermissionController extends Controller {
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'name'=>'required|max:40',
         ]);
@@ -69,9 +80,10 @@ class PermissionController extends Controller {
         }
 
         return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Permission'. $permission->name.' added!');
-
+            ->with(
+                'flash_message',
+                'Permission'. $permission->name.' added!'
+            );
     }
 
     /**
@@ -80,7 +92,8 @@ class PermissionController extends Controller {
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function show($id) {
+    public function show($id)
+    {
         return redirect('permissions');
     }
 
@@ -90,7 +103,8 @@ class PermissionController extends Controller {
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function edit($id) {
+    public function edit($id)
+    {
         $permission = Permission::findOrFail($id);
 
         return view('permissions.edit', compact('permission'));
@@ -103,7 +117,8 @@ class PermissionController extends Controller {
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $permission = Permission::findOrFail($id);
         $this->validate($request, [
             'name'=>'required|max:40',
@@ -112,9 +127,10 @@ class PermissionController extends Controller {
         $permission->fill($input)->save();
 
         return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Permission'. $permission->name.' updated!');
-
+            ->with(
+                'flash_message',
+                'Permission'. $permission->name .' updated!'
+            );
     }
 
     /**
@@ -123,21 +139,26 @@ class PermissionController extends Controller {
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $permission = Permission::findOrFail($id);
 
-    //Make it impossible to delete this specific permission    
-    if ($permission->name == "Administer roles & permissions") {
-            return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Cannot delete this Permission!');
+        //Make it impossible to delete this specific permission
+        if ($permission->name == "Administer roles & permissions") {
+            return redirect()
+                ->route('permissions.index')
+                ->with(
+                    'flash_message',
+                    'Cannot delete this Permission!'
+                );
         }
 
         $permission->delete();
 
         return redirect()->route('permissions.index')
-            ->with('flash_message',
-             'Permission deleted!');
-
+            ->with(
+                'flash_message',
+                'Permission deleted!'
+            );
     }
 }
