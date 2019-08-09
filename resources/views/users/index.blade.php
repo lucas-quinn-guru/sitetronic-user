@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.default.master')
 
-@section('title', '| Users')
+@section('titlePage', 'Users')
 
 @section('content')
 

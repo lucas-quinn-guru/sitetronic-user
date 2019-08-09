@@ -23,9 +23,10 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $roles = Role::all();//Get all roles
+        //Get all roles
+        $roles = Role::all();
 
-        return view('roles.index')->with('roles', $roles);
+        return view('laravel-user::roles.index')->with('roles', $roles);
     }
 
     /**
@@ -34,9 +35,10 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $permissions = Permission::all();//Get all permissions
+        //Get all permissions
+        $permissions = Permission::all();
 
-        return view('roles.create', ['permissions'=>$permissions]);
+        return view('laravel-user::roles.create', ['permissions'=>$permissions]);
     }
 
     /**
@@ -48,7 +50,7 @@ class RoleController extends Controller {
     public function store(Request $request) {
     //Validate name and permissions field
         $this->validate($request, [
-            'name'=>'required|unique:roles|max:10',
+            'name'=>'required|unique:roles|max:25',
             'permissions' =>'required',
             ]
         );
@@ -60,17 +62,18 @@ class RoleController extends Controller {
         $permissions = $request['permissions'];
 
         $role->save();
-    //Looping thru selected permissions
+        //Looping thru selected permissions
         foreach ($permissions as $permission) {
             $p = Permission::where('id', '=', $permission)->firstOrFail();
-         //Fetch the newly created role and assign permission
+
+            //Fetch the newly created role and assign permission
             $role = Role::where('name', '=', $name)->first();
             $role->givePermissionTo($p);
         }
 
-        return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role'. $role->name.' added!');
+        return redirect()
+            ->route('roles.index')
+            ->with('flash_message', 'Role '. $role->name . ' added!');
     }
 
     /**
@@ -93,7 +96,7 @@ class RoleController extends Controller {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
 
-        return view('roles.edit', compact('role', 'permissions'));
+        return view('laravel-user::roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -108,7 +111,7 @@ class RoleController extends Controller {
         $role = Role::findOrFail($id);//Get role with the given id
     //Validate name and permission fields
         $this->validate($request, [
-            'name'=>'required|max:10|unique:roles,name,'.$id,
+            'name'=>'required|max:25|unique:roles,name,'.$id,
             'permissions' =>'required',
         ]);
 
@@ -127,9 +130,9 @@ class RoleController extends Controller {
             $role->givePermissionTo($p);  //Assign permission to role
         }
 
-        return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role'. $role->name.' updated!');
+        return redirect()
+            ->route('roles.index')
+            ->with('flash_message', 'Role ' . $role->name . ' updated!');
     }
 
     /**
@@ -143,9 +146,8 @@ class RoleController extends Controller {
         $role = Role::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role deleted!');
-
+        return redirect()
+            ->route('roles.index')
+            ->with('flash_message', 'Role deleted!');
     }
 }

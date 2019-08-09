@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         //Get all users and pass it to the view
         $users = User::all();
-        return view('users.index')->with('users', $users);
+        return view('laravel-user::users.index')->with('users', $users);
     }
 
     /**
@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         //Get all roles and pass it to the view
         $roles = Role::get();
-        return view('users.create', ['roles'=>$roles]);
+        return view('laravel-user::users.create', ['roles'=>$roles]);
     }
 
     /**
@@ -103,7 +103,7 @@ class UserController extends Controller
         $user = User::findOrFail($id); //Get user with specified id
         $roles = Role::get(); //Get all roles
 
-        return view('users.edit', compact('user', 'roles')); //pass user and roles data to view
+        return view('laravel-user::users.edit', compact('user', 'roles')); //pass user and roles data to view
     }
 
     /**
@@ -120,18 +120,19 @@ class UserController extends Controller
         //Validate name, email and password fields
         $this->validate($request, [
             'name'=>'required|max:120',
-            'email'=>'required|email|unique:users,email,'.$id,
-            'password'=>'required|min:6|confirmed'
+            'email'=>'required|email|unique:users,email,' . $id
         ]);
 
-        $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+        $input = $request->only(['name', 'email']); //Retreive the name, email and password fields
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
 
         if (isset($roles)) {
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
+            //If one or more role is selected associate user to roles
+            $user->roles()->sync($roles);
         } else {
-            $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
+            //If no role is selected remove exisiting role associated to a user
+            $user->roles()->detach();
         }
 
         return redirect()

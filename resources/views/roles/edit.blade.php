@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.default.master')
 
-@section('title', '| Edit Role')
+@section('titlePage', 'Edit Role')
 
 @section('content')
 
@@ -25,7 +25,7 @@
     <br>
     {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
 
-    {{ Form::close() }}    
+    {{ Form::close() }}
 </div>
 
 @endsection

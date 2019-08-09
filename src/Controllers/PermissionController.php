@@ -19,7 +19,7 @@ class PermissionController extends Controller
 
         //isAdmin middleware lets only users with a
         //specific permission permission to access these resources
-        $access[] = [ 'web', 'auth', 'isAdmin' ];
+        $access = [ 'web', 'auth', 'isAdmin' ];
 
         $this->middleware($access);
     }
@@ -57,7 +57,7 @@ class PermissionController extends Controller
     */
     public function store(Request $request)
     {
-        dd( 'got here' );
+        //dd( 'got here' );
 
         $this->validate($request, [
             'name'=>'required|max:40',
@@ -85,7 +85,7 @@ class PermissionController extends Controller
         return redirect()->route('permissions.index')
             ->with(
                 'flash_message',
-                'Permission'. $permission->name.' added!'
+                'Permission '. $permission->name.' added!'
             );
     }
 
@@ -129,10 +129,11 @@ class PermissionController extends Controller
         $input = $request->all();
         $permission->fill($input)->save();
 
-        return redirect()->route('permissions.index')
+        return redirect()
+            ->route('permissions.index')
             ->with(
                 'flash_message',
-                'Permission'. $permission->name .' updated!'
+                'Permission ' . $permission->name . ' updated!'
             );
     }
 

@@ -1,7 +1,7 @@
 {{-- \resources\views\roles\index.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.default.master')
 
-@section('title', '| Roles')
+@section('titleTitle', 'Roles')
 
 @section('content')
 
