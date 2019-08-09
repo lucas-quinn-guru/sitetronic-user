@@ -19,8 +19,7 @@ class PermissionController extends Controller
 
         //isAdmin middleware lets only users with a
         //specific permission permission to access these resources
-        //$access[] = 'auth';
-        $access[] = 'isAdmin';
+        $access[] = [ 'web', 'auth', 'isAdmin' ];
 
         $this->middleware($access);
     }
@@ -47,7 +46,7 @@ class PermissionController extends Controller
     {
         $roles = Role::get(); //Get all roles
 
-        return view('permissions.create')->with('roles', $roles);
+        return view('laravel-user::permissions.create')->with('roles', $roles);
     }
 
     /**
@@ -58,6 +57,8 @@ class PermissionController extends Controller
     */
     public function store(Request $request)
     {
+        dd( 'got here' );
+
         $this->validate($request, [
             'name'=>'required|max:40',
         ]);
@@ -78,6 +79,8 @@ class PermissionController extends Controller
                 $r->givePermissionTo($permission);
             }
         }
+
+
 
         return redirect()->route('permissions.index')
             ->with(
@@ -107,7 +110,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail($id);
 
-        return view('permissions.edit', compact('permission'));
+        return view('laravel-user::permissions.edit', compact('permission'));
     }
 
     /**

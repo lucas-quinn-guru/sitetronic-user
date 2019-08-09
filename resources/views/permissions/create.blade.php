@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.default.master')
 
-@section('title', '| Create Permission')
+@section('titlePage', 'Create Permission')
 
 @section('content')
 
@@ -19,7 +19,7 @@
     @if(!$roles->isEmpty()) //If no roles exist yet
         <h4>Assign Permission to Roles</h4>
 
-        @foreach ($roles as $role) 
+        @foreach ($roles as $role)
             {{ Form::checkbox('roles[]',  $role->id ) }}
             {{ Form::label($role->name, ucfirst($role->name)) }}<br>
 

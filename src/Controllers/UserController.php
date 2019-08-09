@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         //isAdmin middleware lets only users with a
         //specific permission permission to access these resources
-        $this->middleware(['auth', 'isAdmin']);
+        $this->middleware(['web', 'auth', 'isAdmin']);
     }
 
     /**

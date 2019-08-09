@@ -14,7 +14,7 @@ use Session;
 class RoleController extends Controller {
 
     public function __construct() {
-        $this->middleware(['auth', 'isAdmin']);//isAdmin middleware lets only users with a //specific permission permission to access these resources
+        $this->middleware(['web', 'auth', 'isAdmin']);//isAdmin middleware lets only users with a //specific permission permission to access these resources
     }
 
     /**
@@ -62,15 +62,15 @@ class RoleController extends Controller {
         $role->save();
     //Looping thru selected permissions
         foreach ($permissions as $permission) {
-            $p = Permission::where('id', '=', $permission)->firstOrFail(); 
+            $p = Permission::where('id', '=', $permission)->firstOrFail();
          //Fetch the newly created role and assign permission
-            $role = Role::where('name', '=', $name)->first(); 
+            $role = Role::where('name', '=', $name)->first();
             $role->givePermissionTo($p);
         }
 
         return redirect()->route('roles.index')
             ->with('flash_message',
-             'Role'. $role->name.' added!'); 
+             'Role'. $role->name.' added!');
     }
 
     /**

@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\index.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.default.master')
 
-@section('title', '| Permissions')
+@section('titlePage', 'Permissions')
 
 @section('content')
 
@@ -23,7 +23,7 @@
             <tbody>
                 @foreach ($permissions as $permission)
                 <tr>
-                    <td>{{ $permission->name }}</td> 
+                    <td>{{ $permission->name }}</td>
                     <td>
                     <a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
 
