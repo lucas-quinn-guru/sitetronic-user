@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelUserServiceProvider extends ServiceProvider
 {
+
+    protected $commands = [
+        'LucasQuinnGuru\LaravelUser\Commands\SeedRolesAndPermissionsCommand'
+    ];
+
     /**
      * Register services.
      *
@@ -17,6 +22,8 @@ class LaravelUserServiceProvider extends ServiceProvider
             __DIR__ . '/../config/laravel_user.php',
             'laravel-user'
         );
+
+        $this->commands($this->commands);
     }
 
     /**
@@ -26,8 +33,6 @@ class LaravelUserServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-user');

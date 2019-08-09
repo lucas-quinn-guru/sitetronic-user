@@ -23,7 +23,7 @@ class AdminMiddleware
 
             //If user does //not have this permission
             if (!Auth::user()
-                    ->hasPermissionTo('Administer roles & permissions')) {
+                    ->hasPermissionTo('Administer')) {
                 abort('401');
             }
         }

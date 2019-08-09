@@ -1,0 +1,73 @@
+{
+    "0": {
+        "name": "Super Admin",
+        "permissions": {
+            "0": { 
+                    "name": "Administer"
+                }
+            },
+        "roles": {
+            "0": {
+                "name": "User Admin",
+                "permissions": {
+                    "0": {
+                        "name": "Browse Users"
+                    },
+                    "1": {
+                        "name": "Add User"
+                    },
+                    "2": {
+                        "name": "Read User"
+                    },
+                    "3": {
+                        "name": "Edit User"
+                    },
+                    "4": {
+                        "name": "Delete User"
+                    }
+                }
+            },
+            "1": {
+                "name": "Role Admin",
+                "permissions": {
+                    "0": {
+                        "name": "Browse Roles"
+                    },
+                    "1": {
+                        "name": "Read Role"
+                    },
+                    "2": {
+                        "name": "Edit Role"
+                    },
+                    "3": {
+                        "name": "Add Role"
+                    },
+                    "4": {
+                        "name": "Delete Role"
+                    }
+                }
+            },
+            "2": {
+                "name": "Permission Admin",
+                "permissions": {
+                    "0": {
+                        "name": "Browse Permissions"
+                    },
+                    "1": {
+                        "name": "Read Permission"
+                    },
+                    "2": {
+                        "name": "Add Permission"
+                    },
+                    "3": {
+                        "name": "Edit Permission"
+                    },
+                    "4": {
+                        "name": "Delete Permission"
+                    }
+                }
+            }
+        }
+    }
+}
+

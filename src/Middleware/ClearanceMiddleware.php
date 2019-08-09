@@ -16,12 +16,12 @@ class ClearanceMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->hasPermissionTo('Administer roles & permissions')) { //If user has this //permission
+        if (Auth::user()->hasPermissionTo('Administer')) { //If user has this //permission
             return $next($request);
         }
 
         if ($request->is('posts/create')) { //If user is creating a post
-            if (!Auth::user()->hasPermissionTo('Create Post')) {
+            if (!Auth::user()->hasPermissionTo('Add Post')) {
                 abort('401');
             } else {
                 return $next($request);

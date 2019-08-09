@@ -148,7 +148,7 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
 
         //Make it impossible to delete this specific permission
-        if ($permission->name == "Administer roles & permissions") {
+        if ($permission->name == "Administer") {
             return redirect()
                 ->route('permissions.index')
                 ->with(
