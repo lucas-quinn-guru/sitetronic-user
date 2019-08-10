@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\LaravelUser\Commands;
+namespace LucasQuinnGuru\SitetronicUser\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
@@ -51,7 +51,7 @@ class SeedRolesAndPermissionsCommand extends Command {
                 $role->givePermissionTo($permission);
 
                 foreach( $permsVal[ 'roles' ] as $rolesKey=>$rolesVal ) {
-                    
+
                     echo "\tSub Role Name: " . $rolesVal[ 'name' ] . PHP_EOL;
                     $subRole = Role::firstOrNew( [ "name"=>$rolesVal[ 'name' ] ]  );
                     $subRole->name = $rolesVal[ 'name' ];
@@ -60,7 +60,7 @@ class SeedRolesAndPermissionsCommand extends Command {
                         $rolePermissionName = $rolePermissionVal[ 'name' ];
 
                         echo "\t\tPermission: " . $rolePermissionName . PHP_EOL;
-                        
+
                         $rolePermission = Permission::firstOrNew( ["name"=>$rolePermissionName] );
                         $rolePermission->name = $rolePermissionName;
 
@@ -69,7 +69,7 @@ class SeedRolesAndPermissionsCommand extends Command {
                     }
 
                     $subRole->save();
-                    
+
                     if( $user != null ) {
                         $user->assignRole($subRole);
                     }

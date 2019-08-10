@@ -1,5 +1,5 @@
 {
-    "name": "lucas-quinn-guru/laravel-user",
+    "name": "lucas-quinn-guru/sitetronic-user",
     "description": "Front end user profile and settings page out of the box with user/role/permission management backend.",
     "type": "library",
     "license": "MIT",
@@ -17,13 +17,13 @@
     },
     "autoload": {
         "psr-4": {
-            "LucasQuinnGuru\\LaravelUser\\": "src/"
+            "LucasQuinnGuru\\SitetronicUser\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LucasQuinnGuru\\LaravelUser\\LaravelUserServiceProvider"
+                "LucasQuinnGuru\\SitetronicUser\\SitetronicUserServiceProvider"
             ]
         }
     }

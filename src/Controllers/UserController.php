@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         //Get all users and pass it to the view
         $users = User::all();
-        return view('laravel-user::users.index')->with('users', $users);
+        return view('sitetronic-user::users.index')->with('users', $users);
     }
 
     /**
@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         //Get all roles and pass it to the view
         $roles = Role::get();
-        return view('laravel-user::users.create', ['roles'=>$roles]);
+        return view('sitetronic-user::users.create', ['roles'=>$roles]);
     }
 
     /**
@@ -103,7 +103,7 @@ class UserController extends Controller
         $user = User::findOrFail($id); //Get user with specified id
         $roles = Role::get(); //Get all roles
 
-        return view('laravel-user::users.edit', compact('user', 'roles')); //pass user and roles data to view
+        return view('sitetronic-user::users.edit', compact('user', 'roles')); //pass user and roles data to view
     }
 
     /**

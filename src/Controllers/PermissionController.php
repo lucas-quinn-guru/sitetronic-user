@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\LaravelUser\Controllers;
+namespace LucasQuinnGuru\SitetronicUser\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -34,7 +34,7 @@ class PermissionController extends Controller
         //Get all permissions
         $permissions = Permission::all();
 
-        return view('laravel-user::permissions.index')->with('permissions', $permissions);
+        return view('sitetronic-user::permissions.index')->with('permissions', $permissions);
     }
 
     /**
@@ -46,7 +46,7 @@ class PermissionController extends Controller
     {
         $roles = Role::get(); //Get all roles
 
-        return view('laravel-user::permissions.create')->with('roles', $roles);
+        return view('sitetronic-user::permissions.create')->with('roles', $roles);
     }
 
     /**
@@ -110,7 +110,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail($id);
 
-        return view('laravel-user::permissions.edit', compact('permission'));
+        return view('sitetronic-user::permissions.edit', compact('permission'));
     }
 
     /**

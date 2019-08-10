@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\LaravelUser\Middleware;
+namespace LucasQuinnGuru\SitetronicUser\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

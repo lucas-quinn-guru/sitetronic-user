@@ -1,14 +1,14 @@
 <?php
 
-namespace LucasQuinnGuru\LaravelUser;
+namespace LucasQuinnGuru\SitetronicUser;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelUserServiceProvider extends ServiceProvider
+class SitetronicUserServiceProvider extends ServiceProvider
 {
 
     protected $commands = [
-        'LucasQuinnGuru\LaravelUser\Commands\SeedRolesAndPermissionsCommand'
+        'LucasQuinnGuru\SitetronicUser\Commands\SeedRolesAndPermissionsCommand'
     ];
 
     /**
@@ -19,8 +19,8 @@ class LaravelUserServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/laravel_user.php',
-            'laravel-user'
+            __DIR__ . '/../config/sitetronic-user.php',
+            'sitetronic-user'
         );
 
         $this->commands($this->commands);
@@ -35,12 +35,12 @@ class LaravelUserServiceProvider extends ServiceProvider
     {
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-user');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitetronic-user');
 
         $this->app['router']
-            ->aliasMiddleware('isAdmin', \LucasQuinnGuru\LaravelUser\Middleware\AdminMiddleware::class);
+            ->aliasMiddleware('isAdmin', \LucasQuinnGuru\SitetronicUser\Middleware\AdminMiddleware::class);
         $this->app['router']
-            ->aliasMiddleware('clearance', \LucasQuinnGuru\LaravelUser\Middleware\ClearanceMiddleware::class);
+            ->aliasMiddleware('clearance', \LucasQuinnGuru\SitetronicUser\Middleware\ClearanceMiddleware::class);
 
 
         $this->publishes([
