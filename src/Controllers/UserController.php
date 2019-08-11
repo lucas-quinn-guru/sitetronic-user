@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\LaravelUser\Controllers;
+namespace LucasQuinnGuru\SitetronicUser\Controllers;
 
 use Illuminate\Http\Request;
 
