@@ -44,8 +44,8 @@ class SitetronicUserServiceProvider extends ServiceProvider
 
 
         $this->publishes([
-            __DIR__ . '/../config/laravel_user.php' => config_path('laravel_user.php'),
-        ], 'laravel-user-config');
+            __DIR__ . '/../config/sitetronic_user.php' => config_path('sitetronic_user.php'),
+        ], 'sitetronic-user-config');
 
         $this->publishes([
             __DIR__ . '/../resources/assets' => public_path('vendor/lucas-quinn-guru'),
