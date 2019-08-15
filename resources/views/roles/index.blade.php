@@ -26,10 +26,9 @@
                     <tr>
                         <td>{{ $role->name }}</td>
                         <td>{{ str_replace(array('[',']','"'),'', $role->permissions()->pluck('name')) }}</td>{{-- Retrieve array of permissions associated to a role and convert to string --}}
-                        <td>
-                            <a href="{{ URL::to('admin/roles/' . $role->id . '/edit') }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
-
+                        <td style='width:160px'>
                             {!! Form::open(['method' => 'DELETE', 'route' => ['admin.roles.destroy', $role->id] ]) !!}
+                            <a href="{{ URL::to('admin/roles/' . $role->id . '/edit') }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
