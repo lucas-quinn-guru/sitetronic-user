@@ -11,9 +11,9 @@
             <i class='fa fa-user-plus'></i> Edit {{$user->name}}
         </h1>
         <hr>
-        
+
         {{-- Form model binding to automatically populate our fields with user data --}}
-        {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}
+        {{ Form::model($user, array('route' => array('admin.users.update', $user->id), 'method' => 'PUT')) }}
 
         <div class="form-group">
             {{ Form::label('name', 'Name') }}

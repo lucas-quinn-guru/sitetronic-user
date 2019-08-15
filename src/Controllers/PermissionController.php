@@ -82,7 +82,7 @@ class PermissionController extends Controller
 
 
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
             ->with(
                 'flash_message',
                 'Permission '. $permission->name.' added!'
@@ -130,7 +130,7 @@ class PermissionController extends Controller
         $permission->fill($input)->save();
 
         return redirect()
-            ->route('permissions.index')
+            ->route('admin.permissions.index')
             ->with(
                 'flash_message',
                 'Permission ' . $permission->name . ' updated!'
@@ -150,7 +150,7 @@ class PermissionController extends Controller
         //Make it impossible to delete this specific permission
         if ($permission->name == "Administer") {
             return redirect()
-                ->route('permissions.index')
+                ->route('admin.permissions.index')
                 ->with(
                     'flash_message',
                     'Cannot delete this Permission!'
@@ -159,7 +159,7 @@ class PermissionController extends Controller
 
         $permission->delete();
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
             ->with(
                 'flash_message',
                 'Permission deleted!'

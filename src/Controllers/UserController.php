@@ -77,7 +77,7 @@ class UserController extends Controller
 
         //Redirect to the users.index view and display message
         return redirect()
-            ->route('users.index')
+            ->route('admin.users.index')
             ->with('flash_message', 'User successfully added.');
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return redirect('users');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -136,7 +136,7 @@ class UserController extends Controller
         }
 
         return redirect()
-            ->route('users.index')
+            ->route('admin.users.index')
             ->with('flash_message', 'User successfully edited.');
     }
 
@@ -153,7 +153,7 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()
-            ->route('users.index')
+            ->route('admin.users.index')
             ->with('flash_message', 'User successfully deleted.');
     }
 }
