@@ -35,6 +35,7 @@ class SitetronicUserServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitetronic-user');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->app['router']
             ->aliasMiddleware('isAdmin', \LucasQuinnGuru\SitetronicUser\Middleware\AdminMiddleware::class);
