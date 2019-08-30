@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="container">
+    {{ Breadcrumbs::render('sitetronic-user-admin-roles') }}
     <div class="col-lg-10 col-lg-offset-1">
         <h1><i class="fa fa-key"></i> Roles
 

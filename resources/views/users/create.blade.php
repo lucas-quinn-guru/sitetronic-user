@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="container">
+    {{ Breadcrumbs::render('sitetronic-user-admin-index') }}
     <div class='col-lg-4 col-lg-offset-4'>
 
         <h1><i class='fa fa-user-plus'></i> Add User</h1>
